@@ -1,0 +1,38 @@
+name: Build DropSystem OS ISO
+
+on:
+  push:
+    tags: ["v*"]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: debian:bookworm
+      options: --privileged
+
+    steps:
+      - name: Instalar dependências
+        run: |
+          apt update
+          apt install -y live-build build-essential squashfs-tools xorriso git wget
+
+      - name: Baixar código do repositório
+        uses: actions/checkout@v4
+
+      - name: Compilar a ISO
+        run: |
+          sudo lb build
+
+      - name: Gerar checksum SHA256
+        run: |
+          sha256sum *.iso > SHA256SUMS
+
+      - name: Criar Release e anexar ISO
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            *.iso
+            SHA256SUMS
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
