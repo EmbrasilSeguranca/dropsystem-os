@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Wine
+Comment=Executar aplicativos Windows
+Exec=wine
+Icon=wine
+Terminal=false
+Categories=Wine;

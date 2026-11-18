@@ -1,0 +1,10 @@
+#!/bin/sh
+set -eu
+
+lb config \
+  --distribution bookworm \
+  --architectures amd64 \
+  --binary-images iso-hybrid \
+  --debian-installer live \
+  --bootloader syslinux \
+  --bootappend-live "boot=live components username=live"

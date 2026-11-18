@@ -1,0 +1,10 @@
+Window.GetWidth = function () {
+    return Window.GetMaximumWidth();
+};
+
+Window.GetHeight = function () {
+    return Window.GetMaximumHeight();
+};
+
+Window.SetBackgroundTopColor(0.08, 0.05, 0.12);
+Window.SetBackgroundBottomColor(0.08, 0.05, 0.12);

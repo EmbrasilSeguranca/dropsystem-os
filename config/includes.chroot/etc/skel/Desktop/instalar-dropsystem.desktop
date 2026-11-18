@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Instalar DropSystem
+Comment=Instalar o DropSystem OS no computador
+Exec=calamares
+Icon=calamares
+Terminal=false
+Categories=System;

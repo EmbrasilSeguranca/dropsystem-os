@@ -2,7 +2,11 @@ name: Build DropSystem OS ISO
 
 on:
   push:
-    tags: ["v*"]
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
 
 jobs:
   build:
@@ -14,25 +18,24 @@ jobs:
     steps:
       - name: Instalar dependências
         run: |
-          apt update
-          apt install -y live-build build-essential squashfs-tools xorriso git wget
+          apt-get update
+          apt-get install -y live-build build-essential squashfs-tools xorriso git wget ca-certificates
 
       - name: Baixar código do repositório
         uses: actions/checkout@v4
 
+      - name: Configurar live-build
+        run: ./auto/config
+
       - name: Compilar a ISO
-        run: |
-          sudo lb build
+        run: ./auto/build
 
       - name: Gerar checksum SHA256
-        run: |
-          sha256sum *.iso > SHA256SUMS
+        run: sha256sum -- *.iso > SHA256SUMS
 
       - name: Criar Release e anexar ISO
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           files: |
             *.iso
             SHA256SUMS
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

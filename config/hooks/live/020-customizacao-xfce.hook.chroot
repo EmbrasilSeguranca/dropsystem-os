@@ -1,0 +1,17 @@
+#!/bin/sh
+set -e
+
+update-alternatives --set x-session-manager /usr/bin/xfce4-session || true
+
+mkdir -p /etc/skel/.config/xfce4/xfconf/xfce-perchannel-xml
+
+cat > /etc/lightdm/lightdm.conf <<'EOF'
+[Seat:*]
+autologin-user=live
+autologin-user-timeout=0
+autologin-session=xfce
+EOF
+
+if command -v plymouth-set-default-theme >/dev/null 2>&1; then
+  plymouth-set-default-theme dropsystem || true
+fi

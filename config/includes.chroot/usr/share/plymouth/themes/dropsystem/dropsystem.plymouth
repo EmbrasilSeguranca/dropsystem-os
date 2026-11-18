@@ -1,0 +1,8 @@
+[Plymouth Theme]
+Name=DropSystem
+Description=Tema de inicialização DropSystem OS
+ModuleName=script
+
+[script]
+ImageDir=/usr/share/plymouth/themes/dropsystem
+ScriptFile=/usr/share/plymouth/themes/dropsystem/dropsystem.script

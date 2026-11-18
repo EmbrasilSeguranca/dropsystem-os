@@ -1,0 +1,14 @@
+*.iso
+*.iso.hybrid
+SHA256SUMS
+cache/
+binary/
+binary.hybrid/
+live-image-*
+chroot/
+config/binary/
+config/bootstrap/
+config/chroot/
+config/common/
+config/packages.binary/
+.DS_Store
